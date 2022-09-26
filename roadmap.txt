@@ -1,0 +1,37 @@
+Projet picto: 
+
+Eléments à programmer : 
+- moteur de convoyeur (à étudier : distance à parcourir -> vitesse d'entrée du moteur, nécessité de réduction pour vitesse ou couple ; poids des moules avec cire)
+- capteur de proximité (lidar)
+- piston (distribution du moule)
+
+Références :
+- moteur  : 
+- capteur lidar : adafruit VL53L0X
+- piston : 
+- pont en H : module L298N (fais office de shield) 
+
+Système : 
+- Raspberry pi modèle 0H pour les capteurs
+- Raspberry pi modèle 0H pour les moteurs 
+- Raspberry pi modèle 0H pour la buse et le système de chauffe
+- Raspberry pi modèle 3b+ pour la gestion du système et la mise en réseau avec le bras robot
+
+Notes : 
+utilisation du deuxième canal du pont en H pour piloter le moteur du vérin du distributeur (bien penser à prendre un modèle en courant continue 12v sous les 2A)
+Différents éléments : 
+  - capteur laser en début de convoyeur pour mesurer la distance du moule sur le convoyeur 
+  - capteur laser au niveau de la buse pour vérifier le volume de la cire par la hauteur de la cire dans le moule 
+
+Etapes :
+1 - Pousser le moule hors du distributeur
+2 - faire avancer le moule jusqu'à la coulée
+3 - faire couler une légère dose de cire dans le moule
+4 - faire reculer le moule jusqu'à au milieu du convoyeur pour récupérer la tige
+5 - recevoir la tige
+6 - faire revenir le moule jusqu'à la surface de coulée 
+7 - faire couler le reste de cire pour le volume du moule nécessaire
+8 - faire partir le moule vers la zone suivante
+9 - bloquer le système si : 
+  - la sortie est remplie de moules attendant d'être chargés sur la zone de refroidissement
+  - le bras robot emet une erreur relative à la mise en place de la mèche
