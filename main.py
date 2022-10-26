@@ -31,8 +31,10 @@ def sys(self):
                     if 135 < Lazer_Sys.distancesSensor(1) < 170 :
                         Motor_Sys.arret(1)
                     # ! phase d'insertion de la mèche, ordre à recevoir du bras robot
-                        if brasRobot == True:
-                            Motor_Sys.avance(1, 75)
+                        while tempData.tempValue()> 20 :
+                            relay.on(1, 2)
+                        if brasRobot == True and tempData.tempValue()< 20:
+                            Motor_Sys.avance(1, 75)                       
                             if Lazer_Sys.distancesSensor(1) >= 300:
                                 Motor_Sys.arret(1)
                                 # ! phase 2 de la buse à insérer
@@ -41,14 +43,3 @@ def sys(self):
                                     Motor_Sys.avance(1, 75)
 
                                     ## * fin du programme
-
-                    
-
-
-
-
-
-
-
-
-
