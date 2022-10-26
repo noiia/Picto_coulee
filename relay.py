@@ -10,7 +10,7 @@ def handler(signal_received, frame):
     gpio.cleanup()
     exit(0)
  
-def main():
+def on():
     # on passe en mode BMC qui veut dire que nous allons utiliser directement
     # le numero GPIO plutot que la position physique sur la carte
     gpio.setmode(gpio.BCM)
@@ -27,3 +27,4 @@ def main():
         gpio.output(4, gpio.LOW)
         time.sleep(2)
  
+#### https://www.framboise314.fr/controle-dun-dispositif-basse-tension-via-raspberry-pi-et-un-relais/
