@@ -2,7 +2,7 @@
 # * general imports
 import time
 # * personnal imports
-import Motor_Sys, Lazer_Sys, Heating_nozzle_Sys
+import Motor_Sys, Lazer_Sys, Heating_nozzle_Sys, tempData
 
 running = True
 brasRobot = True
