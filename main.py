@@ -6,6 +6,8 @@ import Motor_Sys, Lazer_Sys, Heating_nozzle_Sys, tempData
 
 running = True
 brasRobot = True
+Pin_sortie_robot = 12
+Pin_entree_robot = 13
 
 def __init__(self, **kwargs):
     self.title = "Système coulée"
@@ -30,16 +32,18 @@ def sys(self):
                     Motor_Sys.recule(1,50)
                     if 135 < Lazer_Sys.distancesSensor(1) < 170 :
                         Motor_Sys.arret(1)
+                        GPIO.output(Pin_sortie_robot, GPIO.HIGH)
+                        if GPIO.input(Pin_entree_robot) == True:
                     # ! phase d'insertion de la mèche, ordre à recevoir du bras robot
-                        while tempData.tempValue()> 20 :
-                            relay.on(1, 2)
-                        if brasRobot == True and tempData.tempValue()< 20:
-                            Motor_Sys.avance(1, 75)                       
-                            if Lazer_Sys.distancesSensor(1) >= 300:
-                                Motor_Sys.arret(1)
-                                # ! phase 2 de la buse à insérer
-                                if Lazer_Sys.distancesSensor(2) >= 80:
-                                    # ! arrêt de la buse à insérer
-                                    Motor_Sys.avance(1, 75)
+                            while tempData.tempValue()> 20 :
+                                relay.on(1, 2)
+                            if tempData.tempValue()< 20:
+                                Motor_Sys.avance(1, 75)                       
+                                if Lazer_Sys.distancesSensor(1) >= 300:
+                                    Motor_Sys.arret(1)
+                                    # ! phase 2 de la buse à insérer
+                                    if Lazer_Sys.distancesSensor(2) >= 80:
+                                        # ! arrêt de la buse à insérer
+                                        Motor_Sys.avance(1, 75)
 
-                                    ## * fin du programme
+                                        ## * fin du programme
